@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Header, { HeaderStyles } from './Header.js';
@@ -18,18 +19,20 @@ const ContainerStyles = styled.div`
 `;
 
 export default function App() {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState('https://api.memegen.link/images/bender');
   const [topText, setTopText] = useState('');
   const [bottomText, setBottomText] = useState('');
   const [templateText, setTemplateText] = useState('');
 
-  function handleClick() {
-    alert('yes!');
+  function handleClick(event) {
+    if (event.currentTarget.id === 'download') {
+      saveAs(url, url.slice(32) + '.png');
+    }
+
     setUrl(
       urlBase +
         templateText +
-        '/' +
-        (topText ? topText + '/' : '') +
+        (topText ? '/' + topText + '/' : '') +
         (bottomText ? bottomText + '/' : ''),
     );
   }
@@ -64,6 +67,7 @@ export default function App() {
           templateText={templateText}
           handleClick={handleClick}
           handleTemplateTextChange={handleTemplateTextChange}
+          url={url}
         />
       </InputButtonBoxStyles>
       <PictureBoxStyles>
