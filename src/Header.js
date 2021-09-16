@@ -7,5 +7,10 @@ export default function Header() {
 export const HeaderStyles = styled.div`
   width: 100%;
   height: 20%;
-  background-color: red;
+  /*background-color: lightblue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 5px 5px 10px;
+  font-size: 1.5em;
 `;

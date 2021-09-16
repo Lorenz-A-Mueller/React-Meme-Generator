@@ -3,7 +3,7 @@ import { Input } from './Input.js';
 
 export const InputBoxStyles = styled.div`
   display: flex;
-  background-color: blue;
+  justify-content: space-between;
   width: 100%;
   height: 10%;
 `;
