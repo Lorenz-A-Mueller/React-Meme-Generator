@@ -11,13 +11,11 @@ export const PictureBoxStyles = styled.div`
 
 export default function PictureBox(props) {
   return (
-    <>
-      <img
-        src={props.url ? props.url : loadingGif}
-        style={{ height: '100%' }}
-        alt="Your meme!"
-        onError={props.handleError}
-      ></img>
-    </>
+    <img
+      src={props.url ? props.url : loadingGif}
+      style={{ height: '100%' }}
+      alt="Your meme!"
+      onError={props.handleError}
+    />
   );
 }

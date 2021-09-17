@@ -15,12 +15,12 @@ export default function InputBox(props) {
         value={props.topText}
         placeholder="Top Text"
         onChange={(event) => props.handleTopTextChange(event)}
-      ></Input>
+      />
       <Input
         value={props.bottomText}
         placeholder="Bottom Text"
         onChange={(event) => props.handleBottomTextChange(event)}
-      ></Input>
+      />
     </>
   );
 }

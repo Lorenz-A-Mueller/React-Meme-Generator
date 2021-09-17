@@ -52,7 +52,7 @@ export default function SideBox(props) {
             key={sidePic}
             name={props.topTextArray[index]} // use this for top text (only "real" attributes seem to work with event.currentTarget....)
             id={props.bottomTextArray[index]} // use this for bottom text
-            alt={`A previously generated Meme`}
+            alt="A previously generated Meme"
             onClick={(event) => props.handleImageClick(event)}
           />
         ))}

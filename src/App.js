@@ -10,6 +10,21 @@ import SideBox, { SideBoxStyles } from './SideBox.js';
 const urlBase = 'https://api.memegen.link/images/';
 let newUrl = '';
 
+const GlobalStyle = styled.div`
+  * {
+    font-family: Consolas, monaco, monospace;
+  }
+  body {
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, white, red 95%);
+  }
+`;
+
 const ContainerStyles = styled.div`
   display: flex;
   flex-direction: column;
@@ -89,7 +104,7 @@ export default function App() {
 
   function handleClick(event) {
     if (event.currentTarget.id === 'delete') {
-      //delete-button
+      // delete-button
       setSidePicArray([]);
       setTopTextArray([]);
       setBottomTextArray([]);
@@ -97,7 +112,7 @@ export default function App() {
       // download-button
       saveAs(url, url.slice(32) + '.png'); // save the image, file will not contain first 32 letters (start with the template)
     } else if (event.currentTarget.id === 'generate') {
-      let refinedTopText = topText // replace special characters with their escape equivalents
+      const refinedTopText = topText // replace special characters with their escape equivalents
         .replace(/ /g, '-')
         .replace(/\//g, '~s')
         .replace(/#/g, '~h')
@@ -116,7 +131,7 @@ export default function App() {
         (topText ? '/' + refinedTopText : '') +
         (topText && bottomText ? '/' + refinedBottomText + '/' : '');
 
-      setUrl(''); //image will show the loading gif
+      setUrl(''); // image will show the loading gif
       fetch(newUrl).then(() => {
         setUrl(newUrl); // set url to the custom on value after the time it takes for the fetching (used for timing), image will then show the meme
       });
@@ -150,42 +165,44 @@ export default function App() {
   }
 
   return (
-    <OuterContainerStyles>
-      <SideBoxStyles>
-        <SideBox
-          sidePicArray={sidePicArray}
-          topTextArray={topTextArray}
-          bottomTextArray={bottomTextArray}
-          handleClick={handleClick}
-          handleImageClick={handleImageClick}
-        />
-      </SideBoxStyles>
-      <ContainerStyles>
-        <HeaderStyles>
-          <Header />
-        </HeaderStyles>
-        <InputBoxStyles>
-          <InputBox
-            topText={topText}
-            bottomText={bottomText}
-            handleTopTextChange={handleTopTextChange}
-            handleBottomTextChange={handleBottomTextChange}
-          />
-        </InputBoxStyles>
-        <InputButtonBoxStyles>
-          <InputButtonBox
-            templateText={templateText}
+    <GlobalStyle>
+      <OuterContainerStyles>
+        <SideBoxStyles>
+          <SideBox
+            sidePicArray={sidePicArray}
+            topTextArray={topTextArray}
+            bottomTextArray={bottomTextArray}
             handleClick={handleClick}
-            handleTemplateTextChange={handleTemplateTextChange}
-            url={url}
-            templateIds={templateIds}
-            templateNames={templateNames}
+            handleImageClick={handleImageClick}
           />
-        </InputButtonBoxStyles>
-        <PictureBoxStyles>
-          <PictureBox url={url} handleError={handleError} />
-        </PictureBoxStyles>
-      </ContainerStyles>
-    </OuterContainerStyles>
+        </SideBoxStyles>
+        <ContainerStyles>
+          <HeaderStyles>
+            <Header />
+          </HeaderStyles>
+          <InputBoxStyles>
+            <InputBox
+              topText={topText}
+              bottomText={bottomText}
+              handleTopTextChange={handleTopTextChange}
+              handleBottomTextChange={handleBottomTextChange}
+            />
+          </InputBoxStyles>
+          <InputButtonBoxStyles>
+            <InputButtonBox
+              templateText={templateText}
+              handleClick={handleClick}
+              handleTemplateTextChange={handleTemplateTextChange}
+              url={url}
+              templateIds={templateIds}
+              templateNames={templateNames}
+            />
+          </InputButtonBoxStyles>
+          <PictureBoxStyles>
+            <PictureBox url={url} handleError={handleError} />
+          </PictureBoxStyles>
+        </ContainerStyles>
+      </OuterContainerStyles>
+    </GlobalStyle>
   );
 }
